@@ -3,26 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odds and Events</title>
+    <title>Odds and Evens</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <form>
+    <form id="numberForm">
       <label>
-        Add a Number to the Bank
-        <input id="inputNumber" name="number" type="number" />
+        Add a Number to the Bank:
+        <input id="inputNumber" name="number" type="text" />
       </label>
-      <button>Add Number</button>
+      <button id="addNumberButton">Add Number</button>
     </form>
+
     <main>
       <section id="numberBank">
         <h1>Number Bank</h1>
-        <output></output>
+        <output id="numberOutput"></output>
         <div>
           <button id="sortOne">Sort 1</button>
           <button id="sortAll">Sort All</button>
         </div>
       </section>
+
       <section id="sortedNumbers">
         <h1>Sorted Numbers</h1>
         <section id="odds">
@@ -35,6 +37,7 @@
         </section>
       </section>
     </main>
+
     <script src="index.js"></script>
   </body>
 </html>

@@ -1,54 +1,47 @@
-
-
-const form = document.querySelector('form')
-const addNumButton = document.querySelector('button')
-const output = document.querySelector('output')
-const sortOne = document.querySelector('#sortOne')
-const sortAll = document.querySelector('#sortAll')
-const evens = document.querySelector('#even')
-const odds = document.querySelector('#odd')
+const form = document.querySelector('#numberForm');
+const addNumButton = document.querySelector('#addNumberButton');
+const numberOutput = document.querySelector('#numberOutput');
+const sortOneButton = document.querySelector('#sortOne');
+const sortAllButton = document.querySelector('#sortAll');
+const evensOutput = document.querySelector('#even');
+const oddsOutput = document.querySelector('#odd');
 let numbersArray = [];
 
-
-
 form.addEventListener('submit', (event) => {
-    
-    event.preventDefault()
+  event.preventDefault();
+  
+  const inputNumber = document.querySelector('#inputNumber').value.trim();
+  const number = parseInt(inputNumber);
 
-    const inputNumber = document.querySelector('#inputNumber')
-    const numbers = parseInt(inputNumber.value);
+  if (!isNaN(number)) {
+    numbersArray.push(number);
+    updateNumberBank();
+  }
 
-    output.innerHTML = numbers
-    numbersArray.push(numbers);
-
-    inputNumber.value = '';
+  document.querySelector('#inputNumber').value = '';
 });
 
 
-
-sortOne.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    if (numbersArray.length > 0) {
-        const firstNumber = numbersArray.shift();
-        numberEvaluator(firstNumber);
-    }
+function updateNumberBank() {
+  numberOutput.innerHTML = numbersArray.join(', ');
+}
+sortOneButton.addEventListener('click', (event) => {
+  if (numbersArray.length > 0) {
+    const firstNumber = numbersArray.shift();
+    numberEvaluator(firstNumber);
+    updateNumberBank();
+  }
 });
 
-sortAll.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    evens.innerHTML = '';
-    odds.innerHTML = '';
-
-    numbersArray.forEach(numbers => numberEvaluator(numbers));
+sortAllButton.addEventListener('click', (event) => {
+  numbersArray.forEach(number => numberEvaluator(number));
+  numbersArray = []
+  updateNumberBank();
 });
-
-
-function numberEvaluator(numbers) {
-    if ( numbers % 2 === 0 ) {
-        evens.innerHTML += numbers + '<br>';
-    } else {
-        odds.innerHTML += numbers + '<br>';
-    }
+function numberEvaluator(number) {
+  if (number % 2 === 0) {
+    evensOutput.innerHTML += number + '<br>';
+  } else {
+    oddsOutput.innerHTML += number + '<br>';
+  }
 }
